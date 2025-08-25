@@ -2,5 +2,11 @@
 src = "src"
 out = "out"
 libs = ["lib"]
+fs_permissions = [{ access = "read-write", path = "./script-deploy-data"}]
+
+[rpc_endpoints]
+local = "http://127.0.0.1:8545"
+warehouse = "https://rpc.warehouse.dkargo.io"
+dkargo = "https://mainnet-rpc.dkargo.io"
 
 # See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options

@@ -1,0 +1,14 @@
+{
+  "name": "dkargo-minimal-smart-account",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "dkargo",
+  "license": "MIT",
+  "scripts": {
+    "deploy":"forge script ./script/Deploy.s.sol --broadcast"
+  },
+  "dependencies": {
+    "@account-abstraction/contracts": "0.7.0",
+    "dotenv": "^17.2.1"
+  }
+}

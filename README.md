@@ -1,66 +1,77 @@
-## Foundry
+# dKargo Minimal Smart Account (ERC-7579)
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+[![Foundry](https://img.shields.io/badge/Solidity-e6e6e6?style=for-the-badge-333333&logo=solidity&logoColor=black)]()
+[![Foundry](https://img.shields.io/badge/Built%20with-Foundry-FFBD10.svg)](https://getfoundry.sh/)
 
-Foundry consists of:
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+**dKargo Minimal Smart Account (MSA)** is an Account Abstraction smart-contract system that implements the ERC-7579 and ERC-4337 standards. This project provides capabilities to create and manage smart accounts on the EVM blockchain.
 
-## Documentation
+## Contract Overview
+| Contract                                          	| Description                                                                                 	|
+|---------------------------------------------------	|---------------------------------------------------------------------------------------------	|
+| [MinimalSmartAccount (MSA.sol)](./src/MSA.sol) 	    | A smart account implementation that complies with ERC-7579 and ERC-4337 standards.          	|
+| [MSAFactory (MSAFactory.sol)](./src/MSAFactory.sol) 	| Factory contract that creates smart accounts with deterministic addresses.                  	|
+| [MSAProxy (MSAProxy.sol)](./src/MSAProxy.sol)       	| Proxy contract for smart accounts that provides upgradeability using the ERC-1967 standard. 	|
 
-https://book.getfoundry.sh/
+## Installation & Setup
 
-## Usage
+### Requirements
+- [Foundry](https://getfoundry.sh/) (Forge, Cast, Anvil)
+- Node.js and Yarn
 
-### Build
+### Installation
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/dKargo/dkargo-minimal-smart-account.git
+    cd dkargo-minimal-smart-account
+    ```
 
-```shell
-$ forge build
+2. Install dependencies:
+    ```bash
+    forge install
+    yarn install
+    ```
+
+## Deployment
+#### (1) To deploy the contracts, set .env file
+
+```Shell
+cp .env.example .env
 ```
 
-### Test
-
-```shell
-$ forge test
+#### (2) Write .env file data
+```
+ETH_FROM=
+MNEMONIC=
+SALT=
 ```
 
-### Format
+Environment variables used in the deployment script:
+- `ETH_FROM`: The address to broadcast transactions from
+- `MNEMONIC`: Mnemonic for generating the broadcast address (if ETH_FROM is not specified)
+- `SALT`: Salt value for deterministic deployments
 
-```shell
-$ forge fmt
+
+#### (3) run the following command:
+```bash
+yarn deploy
+
+# rpc_endpoints writen in foundry.toml
+yarn deploy --network warehouse
 ```
 
-### Gas Snapshots
+Or you can directly run the Forge script:
 
-```shell
-$ forge snapshot
+```bash
+forge script ./script/Deploy.s.sol --broadcast
 ```
 
-### Anvil
+## Network Environments
+RPC endpoints defined in the `foundry.toml` file:
+- `local`: http://127.0.0.1:8545
+- `warehouse`: https://rpc.warehouse.dkargo.io
+- `dkargo`: https://mainnet-rpc.dkargo.io
 
-```shell
-$ anvil
-```
 
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+## License
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
